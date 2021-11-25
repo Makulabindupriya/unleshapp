@@ -1,0 +1,24 @@
+package com.example.featuretoggle.controller;
+
+
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+
+
+@RestController
+public class ToggleController {
+	
+	@GetMapping
+	String getHello(Model model)   
+	{  
+		model.addAttribute("something", "this is the test feature toggle app");
+
+		return "welcome";  
+	}  
+
+
+}

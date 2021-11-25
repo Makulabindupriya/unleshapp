@@ -1,0 +1,22 @@
+package com.javasampleapplication.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloWorldController {
+
+@RequestMapping("/bindu")
+public String hello()   
+{  
+
+	return "Hello.....this is first Spring web application";  
+}  
+
+@RequestMapping("/welcome")
+public String getHello() {
+	
+	return "welcome";
+} 
+
+}

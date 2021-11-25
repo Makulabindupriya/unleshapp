@@ -1,0 +1,48 @@
+package com.example.demo.component;
+
+import org.springframework.stereotype.Component;
+
+import no.finn.unleash.DefaultUnleash;
+import no.finn.unleash.Unleash;
+import no.finn.unleash.UnleashContext;
+import no.finn.unleash.strategy.GradualRolloutRandomStrategy;
+import no.finn.unleash.strategy.UserWithIdStrategy;
+import no.finn.unleash.util.UnleashConfig;
+
+@Component
+public class ToggleComponent {
+	
+	private Unleash unleash;
+	
+	public ToggleComponent() {
+		System.out.println("in ToggleComponent()");
+		UnleashConfig config = UnleashConfig.builder()
+					.appName("javatestapp")
+					.fetchTogglesInterval(1)
+					.customHttpHeader("Authorization", "11940159844c3394ec9e0cfc02aa75fa559c352c6a3bb355836f09be53406be5")
+					.unleashAPI("https://eu.app.unleash-hosted.com/eubb1003/api/")
+					.build();
+		unleash = new DefaultUnleash(config, new UserWithIdStrategy(), new GradualRolloutRandomStrategy());
+	}
+	
+	public boolean isDefaultToggleActive(final String feature) {
+		System.out.println("unleash object: " + unleash);
+		return unleash.isEnabled(feature);
+	}
+	
+	public boolean isUserIdToggleActive(final String feature, UnleashContext context) {
+		return unleash.isEnabled(feature, context);
+	}
+	
+	public boolean isGradualToggleActive(final String feature, UnleashContext context) {
+		return unleash.isEnabled(feature, context);
+	}
+	
+	public boolean isBetaToggleActive(final String feature, UnleashContext context) {
+		return unleash.isEnabled(feature, context);
+	}
+	
+	
+	
+	
+}

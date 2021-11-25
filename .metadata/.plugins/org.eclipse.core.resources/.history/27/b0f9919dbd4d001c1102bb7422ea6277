@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Feature Flags with unleash</title>
+
+    <link rel="stylesheet" href="css/dasboard.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</head>
+<body> 
+    <header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    	<a class="navbar-brand" href="#"><img src="data:image/png;base64,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"></a>
+        <a class="navbar-brand" href="#"><strong>TestFeatureFlags</strong></a>
+        <button class="navbar-toggler" aria-expanded="false" aria-controls="navbarCollapse" aria-label="Toggle navigation" type="button" data-target="#navbarCollapse" data-toggle="collapse">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto alignNavBar">
+            <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active" th:if="${Beta}">
+            <a class="nav-link" href="#">About Us <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active" th:if="${Documentation}">
+            <a class="nav-link" href="https://docs.getunleash.io/">Documentation <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active" th:if="${Demo}">
+            <a class="nav-link" href="https://github.com/Unleash/unleash">Demo Apps <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+            <a class="nav-link" href="#">Privacy <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active" th:if="${Contact}">
+            <a class="nav-link" href="#">Contact Us <span class="sr-only">(current)</span></a>
+            </li>
+            
+        </ul>
+        </div>
+    </nav>
+    </header>
+    <div class="container-fluid body-content">
+	<div class="row">
+	<div class="col-md-6">
+		<div class="divposition">
+		<div class="divroll">
+        <h1 class="mt-5"><strong>Welcome To Unleash</strong></h1> 
+        <h2>Create with freedom.</h2>
+        <h2>Release with confidence.</h2>
+		<button class="btn btn-primary"><a class=" olorclass" href="https://demo.unleash-hosted.com/">TRY OUR DEMO</a></button>
+        <!--<p>Learn more about <a href="https://docs.getunleash.io/">Feature Flags With Unleash</a></p>-->
+		</div>
+		</div>
+		</div>
+		<div class="col-md-6">
+		<img class="dummyimg1" src="https://www.getunleash.io/_next/image?url=https%3A%2F%2Fcdn.getunleash.io%2Fuploads%2F2021%2F07%2FMockup_Home_8_edited.png&w=1300&q=80" alt="Unleash Features">
+		</div>
+	</div>
+    </div>
+    
+</body>
+</html>

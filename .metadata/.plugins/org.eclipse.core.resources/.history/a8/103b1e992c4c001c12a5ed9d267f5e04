@@ -1,0 +1,13 @@
+package com.testtoggleapp.testtoggleapp;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class TesttoggleappApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(TesttoggleappApplication.class, args);
+	}
+
+}

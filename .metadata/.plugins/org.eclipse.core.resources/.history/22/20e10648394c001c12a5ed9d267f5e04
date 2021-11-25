@@ -1,0 +1,16 @@
+package com.example.featuretoggle.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class ToggleController {
+	
+@RequestMapping("/")
+public String hello()   
+{  
+
+	return "Hello.....this is the Test Feature Toggle Application";  
+}  
+
+}

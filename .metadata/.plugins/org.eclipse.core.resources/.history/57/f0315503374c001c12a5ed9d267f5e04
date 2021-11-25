@@ -1,0 +1,5 @@
+package com.example.featuretoggle.controller;
+
+public class ToggleController {
+
+}

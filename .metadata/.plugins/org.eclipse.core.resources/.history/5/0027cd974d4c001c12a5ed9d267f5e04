@@ -1,0 +1,21 @@
+package com.example.featuretoggle.controller;
+
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+
+
+
+@Controller
+public class ToggleController {
+	
+	@RequestMapping("/bindu")
+	public String hello()   
+	{  
+
+		return "Hello.....this is test Feature Toggle Application";  
+	}  
+
+
+}
